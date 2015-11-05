@@ -1,0 +1,10 @@
+<h1>The Best Pizza Places in New York City</h1>
+
+<ul id="pizza-places">
+  <% @pizza_places.each do |place| %>
+    <li>
+      <%= link_to place.name, pizza_place_path(place),
+      class: 'place_name', id: "pizza_place_#{place.id}" %>
+    </li>
+  <% end %>
+</ul>
