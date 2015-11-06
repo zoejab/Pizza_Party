@@ -1,5 +1,5 @@
-# module YelpHelper
-#
+module YelpHelper
+
 # client = Yelp::Client.new({ consumer_key: ENV['YELP_API_KEY'],
 #                             consumer_secret: ENV['YELP_API_SECRET'],
 #                             token: ENV['YELP_API_TOKEN'],
@@ -9,4 +9,4 @@
 #     def search
 #       Yelp.client.search('San Francisco')
 #     end
-# end
+end
