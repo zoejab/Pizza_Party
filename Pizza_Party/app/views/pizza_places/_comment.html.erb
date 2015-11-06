@@ -1,5 +1,15 @@
 <div>
-  <h4>Comment by <%= comment.user_id %></h4>
-  <p>Posted <%= distance_of_time_in_words(comment.pizza_place.created_at, comment.created_at) %> ago</p>
+
+  <p class="timestamp"><%= time_ago_in_words(comment.created_at) %>
+     ago</p>
+
   <p class="comment"><%= comment.body %></p>
+
+
+<!-- <%#= link_to "Delete", pizza_place_comment_path(comment.id), method: :delete, data: {confirm: "Really delete the comment?"} %><br> -->
+
+<%= link_to "Edit", pizza_place_comment_path(@pizza_place.id, comment.id), method: :update %>
+
+
+
 </div>

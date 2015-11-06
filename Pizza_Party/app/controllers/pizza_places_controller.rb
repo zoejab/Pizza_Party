@@ -4,20 +4,23 @@ class PizzaPlacesController < ApplicationController
     @pizza_places = PizzaPlace.all
   end
 
-  # def new
-  #   @pizza_place = PizzaPlace.new
-  # end
-  #
-  # def create
-  # end
-  #
-  # def destroy
-  # end
 
   def show
     @pizza_place = PizzaPlace.find(params[:id])
+    @comment = Comment.new
+    @comment.pizza_place_id = @pizza_place.id
+
   end
 
   def edit
+    @comment = Comment.find(params[:id])
+  end
+
+  def destroy
+    @comment = Comment.find(params[:id])
+    @comment.destroy
+    redirect_to pizza_place_path
+    # # @pizza_place = PizzaPlace.find(params[:id])
+    # redirect_to pizza_place_path(@pizza_place.id)
   end
 end
