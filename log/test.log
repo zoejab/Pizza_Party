@@ -1,0 +1,507 @@
+  [1m[36m (513.7ms)[0m  [1mDROP DATABASE IF EXISTS "Pizza_Party_test"[0m
+  [1m[35m (1436.7ms)[0m  CREATE DATABASE "Pizza_Party_test" ENCODING = 'unicode'
+  [1m[36mSQL (25.0ms)[0m  [1mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (56.9ms)[0m  CREATE TABLE "comments" ("id" serial primary key, "body" text, "pizza_place_id" integer, "user_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) 
+  [1m[36m (1.4ms)[0m  [1mCREATE  INDEX  "index_comments_on_pizza_place_id" ON "comments" USING btree ("pizza_place_id")[0m
+  [1m[35m (1.5ms)[0m  CREATE  INDEX  "index_comments_on_user_id" ON "comments" USING btree ("user_id")
+  [1m[36m (4.5ms)[0m  [1mCREATE TABLE "pizza_places" ("id" serial primary key, "name" character varying, "address" character varying, "city" character varying, "state" character varying, "zipcode" integer, "phone" character varying, "rating" integer, "website" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35m (0.9ms)[0m  CREATE TABLE "pizza_places_users" ("user_id" integer NOT NULL, "pizza_place_id" integer NOT NULL) 
+  [1m[36m (3.6ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "username" character varying, "email" character varying, "password_digest" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35m (2.9ms)[0m  ALTER TABLE "comments" ADD CONSTRAINT "fk_rails_66923cdbe9"
+FOREIGN KEY ("pizza_place_id")
+  REFERENCES "pizza_places" ("id")
+
+  [1m[36m (2.0ms)[0m  [1mALTER TABLE "comments" ADD CONSTRAINT "fk_rails_03de2dc08c"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (2.7ms)[0m  CREATE TABLE "schema_migrations" ("version" character varying NOT NULL) 
+  [1m[36m (1.4ms)[0m  [1mCREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")[0m
+  [1m[35m (0.3ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (0.6ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20151105200404')[0m
+  [1m[35m (0.8ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20151105192128')
+  [1m[36m (0.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20151105192321')[0m
+  [1m[35m (0.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20151105192442')
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (1.2ms)[0m  ALTER TABLE "pizza_places_users" DISABLE TRIGGER ALL;ALTER TABLE "pizza_places" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "comments" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.5ms)[0m  DELETE FROM "comments"
+  [1m[36mFixture Insert (0.7ms)[0m  [1mINSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:07:43', '2015-11-06 17:07:43', 980190962)[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:07:43', '2015-11-06 17:07:43', 298486374)
+  [1m[36mFixture Delete (0.3ms)[0m  [1mDELETE FROM "pizza_places"[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:07:43', '2015-11-06 17:07:43', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:07:43', '2015-11-06 17:07:43', 298486374)[0m
+  [1m[35mFixture Delete (0.3ms)[0m  DELETE FROM "users"
+  [1m[36mFixture Insert (12.7ms)[0m  [1mINSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:07:43', '2015-11-06 17:07:43', 980190962)[0m
+PG::UndefinedColumn: ERROR:  column "pizza_place_id" of relation "users" does not exist
+LINE 1: ... "users" ("username", "email", "password_digest", "pizza_pla...
+                                                             ^
+: INSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:07:43', '2015-11-06 17:07:43', 980190962)
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (1.5ms)[0m  [1mALTER TABLE "pizza_places_users" ENABLE TRIGGER ALL;ALTER TABLE "pizza_places" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "comments" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.8ms)[0m  ALTER TABLE "pizza_places_users" DISABLE TRIGGER ALL;ALTER TABLE "pizza_places" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "comments" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.3ms)[0m  DELETE FROM "comments"
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:07:43', '2015-11-06 17:07:43', 980190962)[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:07:43', '2015-11-06 17:07:43', 298486374)
+  [1m[36mFixture Delete (0.3ms)[0m  [1mDELETE FROM "pizza_places"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:07:43', '2015-11-06 17:07:43', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:07:43', '2015-11-06 17:07:43', 298486374)[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "users"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:07:43', '2015-11-06 17:07:43', 980190962)[0m
+PG::UndefinedColumn: ERROR:  column "pizza_place_id" of relation "users" does not exist
+LINE 1: ... "users" ("username", "email", "password_digest", "pizza_pla...
+                                                             ^
+: INSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:07:43', '2015-11-06 17:07:43', 980190962)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.6ms)[0m  [1mALTER TABLE "pizza_places_users" ENABLE TRIGGER ALL;ALTER TABLE "pizza_places" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "comments" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.7ms)[0m  ALTER TABLE "pizza_places_users" DISABLE TRIGGER ALL;ALTER TABLE "pizza_places" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "comments" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "comments"
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:07:43', '2015-11-06 17:07:43', 980190962)[0m
+  [1m[35mFixture Insert (0.1ms)[0m  INSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:07:43', '2015-11-06 17:07:43', 298486374)
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "pizza_places"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:07:43', '2015-11-06 17:07:43', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:07:43', '2015-11-06 17:07:43', 298486374)[0m
+  [1m[35mFixture Delete (0.3ms)[0m  DELETE FROM "users"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:07:43', '2015-11-06 17:07:43', 980190962)[0m
+PG::UndefinedColumn: ERROR:  column "pizza_place_id" of relation "users" does not exist
+LINE 1: ... "users" ("username", "email", "password_digest", "pizza_pla...
+                                                             ^
+: INSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:07:43', '2015-11-06 17:07:43', 980190962)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.9ms)[0m  [1mALTER TABLE "pizza_places_users" ENABLE TRIGGER ALL;ALTER TABLE "pizza_places" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "comments" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.8ms)[0m  ALTER TABLE "pizza_places_users" DISABLE TRIGGER ALL;ALTER TABLE "pizza_places" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "comments" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "comments"
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:07:43', '2015-11-06 17:07:43', 980190962)[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:07:43', '2015-11-06 17:07:43', 298486374)
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "pizza_places"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:07:43', '2015-11-06 17:07:43', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:07:43', '2015-11-06 17:07:43', 298486374)[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "users"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:07:43', '2015-11-06 17:07:43', 980190962)[0m
+PG::UndefinedColumn: ERROR:  column "pizza_place_id" of relation "users" does not exist
+LINE 1: ... "users" ("username", "email", "password_digest", "pizza_pla...
+                                                             ^
+: INSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:07:43', '2015-11-06 17:07:43', 980190962)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.6ms)[0m  [1mALTER TABLE "pizza_places_users" ENABLE TRIGGER ALL;ALTER TABLE "pizza_places" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "comments" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.7ms)[0m  ALTER TABLE "pizza_places_users" DISABLE TRIGGER ALL;ALTER TABLE "pizza_places" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "comments" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "comments"
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:07:43', '2015-11-06 17:07:43', 980190962)[0m
+  [1m[35mFixture Insert (0.1ms)[0m  INSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:07:43', '2015-11-06 17:07:43', 298486374)
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "pizza_places"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:07:43', '2015-11-06 17:07:43', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:07:43', '2015-11-06 17:07:43', 298486374)[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "users"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:07:43', '2015-11-06 17:07:43', 980190962)[0m
+PG::UndefinedColumn: ERROR:  column "pizza_place_id" of relation "users" does not exist
+LINE 1: ... "users" ("username", "email", "password_digest", "pizza_pla...
+                                                             ^
+: INSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:07:43', '2015-11-06 17:07:43', 980190962)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.6ms)[0m  [1mALTER TABLE "pizza_places_users" ENABLE TRIGGER ALL;ALTER TABLE "pizza_places" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "comments" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.6ms)[0m  ALTER TABLE "pizza_places_users" DISABLE TRIGGER ALL;ALTER TABLE "pizza_places" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "comments" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "comments"
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:07:43', '2015-11-06 17:07:43', 980190962)[0m
+  [1m[35mFixture Insert (0.1ms)[0m  INSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:07:43', '2015-11-06 17:07:43', 298486374)
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "pizza_places"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:07:43', '2015-11-06 17:07:43', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:07:43', '2015-11-06 17:07:43', 298486374)[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "users"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:07:43', '2015-11-06 17:07:43', 980190962)[0m
+PG::UndefinedColumn: ERROR:  column "pizza_place_id" of relation "users" does not exist
+LINE 1: ... "users" ("username", "email", "password_digest", "pizza_pla...
+                                                             ^
+: INSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:07:43', '2015-11-06 17:07:43', 980190962)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.6ms)[0m  [1mALTER TABLE "pizza_places_users" ENABLE TRIGGER ALL;ALTER TABLE "pizza_places" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "comments" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.6ms)[0m  ALTER TABLE "pizza_places_users" DISABLE TRIGGER ALL;ALTER TABLE "pizza_places" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "comments" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "comments"
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:07:43', '2015-11-06 17:07:43', 980190962)[0m
+  [1m[35mFixture Insert (0.1ms)[0m  INSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:07:43', '2015-11-06 17:07:43', 298486374)
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "pizza_places"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:07:43', '2015-11-06 17:07:43', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:07:43', '2015-11-06 17:07:43', 298486374)[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "users"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:07:43', '2015-11-06 17:07:43', 980190962)[0m
+PG::UndefinedColumn: ERROR:  column "pizza_place_id" of relation "users" does not exist
+LINE 1: ... "users" ("username", "email", "password_digest", "pizza_pla...
+                                                             ^
+: INSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:07:43', '2015-11-06 17:07:43', 980190962)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.9ms)[0m  [1mALTER TABLE "pizza_places_users" ENABLE TRIGGER ALL;ALTER TABLE "pizza_places" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "comments" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.6ms)[0m  ALTER TABLE "pizza_places_users" DISABLE TRIGGER ALL;ALTER TABLE "pizza_places" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "comments" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "comments"
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:07:43', '2015-11-06 17:07:43', 980190962)[0m
+  [1m[35mFixture Insert (0.1ms)[0m  INSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:07:43', '2015-11-06 17:07:43', 298486374)
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "pizza_places"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:07:43', '2015-11-06 17:07:43', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:07:43', '2015-11-06 17:07:43', 298486374)[0m
+  [1m[35mFixture Delete (0.3ms)[0m  DELETE FROM "users"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:07:43', '2015-11-06 17:07:43', 980190962)[0m
+PG::UndefinedColumn: ERROR:  column "pizza_place_id" of relation "users" does not exist
+LINE 1: ... "users" ("username", "email", "password_digest", "pizza_pla...
+                                                             ^
+: INSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:07:43', '2015-11-06 17:07:43', 980190962)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.7ms)[0m  [1mALTER TABLE "pizza_places_users" ENABLE TRIGGER ALL;ALTER TABLE "pizza_places" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "comments" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.7ms)[0m  ALTER TABLE "pizza_places_users" DISABLE TRIGGER ALL;ALTER TABLE "pizza_places" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "comments" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "comments"
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:07:43', '2015-11-06 17:07:43', 980190962)[0m
+  [1m[35mFixture Insert (0.1ms)[0m  INSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:07:43', '2015-11-06 17:07:43', 298486374)
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "pizza_places"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:07:43', '2015-11-06 17:07:43', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:07:43', '2015-11-06 17:07:43', 298486374)[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "users"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:07:43', '2015-11-06 17:07:43', 980190962)[0m
+PG::UndefinedColumn: ERROR:  column "pizza_place_id" of relation "users" does not exist
+LINE 1: ... "users" ("username", "email", "password_digest", "pizza_pla...
+                                                             ^
+: INSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:07:43', '2015-11-06 17:07:43', 980190962)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.7ms)[0m  [1mALTER TABLE "pizza_places_users" ENABLE TRIGGER ALL;ALTER TABLE "pizza_places" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "comments" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.8ms)[0m  ALTER TABLE "pizza_places_users" DISABLE TRIGGER ALL;ALTER TABLE "pizza_places" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "comments" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "comments"
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:07:43', '2015-11-06 17:07:43', 980190962)[0m
+  [1m[35mFixture Insert (0.1ms)[0m  INSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:07:43', '2015-11-06 17:07:43', 298486374)
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "pizza_places"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:07:43', '2015-11-06 17:07:43', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:07:43', '2015-11-06 17:07:43', 298486374)[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "users"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:07:43', '2015-11-06 17:07:43', 980190962)[0m
+PG::UndefinedColumn: ERROR:  column "pizza_place_id" of relation "users" does not exist
+LINE 1: ... "users" ("username", "email", "password_digest", "pizza_pla...
+                                                             ^
+: INSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:07:43', '2015-11-06 17:07:43', 980190962)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.7ms)[0m  [1mALTER TABLE "pizza_places_users" ENABLE TRIGGER ALL;ALTER TABLE "pizza_places" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "comments" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (1.2ms)[0m  ALTER TABLE "pizza_places_users" DISABLE TRIGGER ALL;ALTER TABLE "pizza_places" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "comments" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.4ms)[0m  DELETE FROM "comments"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:10:34', '2015-11-06 17:10:34', 980190962)[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:10:34', '2015-11-06 17:10:34', 298486374)
+  [1m[36mFixture Delete (0.3ms)[0m  [1mDELETE FROM "pizza_places"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:10:34', '2015-11-06 17:10:34', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:10:34', '2015-11-06 17:10:34', 298486374)[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "users"
+  [1m[36mFixture Insert (0.4ms)[0m  [1mINSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:10:34', '2015-11-06 17:10:34', 980190962)[0m
+PG::UndefinedColumn: ERROR:  column "pizza_place_id" of relation "users" does not exist
+LINE 1: ... "users" ("username", "email", "password_digest", "pizza_pla...
+                                                             ^
+: INSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:10:34', '2015-11-06 17:10:34', 980190962)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.6ms)[0m  [1mALTER TABLE "pizza_places_users" ENABLE TRIGGER ALL;ALTER TABLE "pizza_places" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "comments" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (1.1ms)[0m  ALTER TABLE "pizza_places_users" DISABLE TRIGGER ALL;ALTER TABLE "pizza_places" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "comments" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "comments"
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:10:34', '2015-11-06 17:10:34', 980190962)[0m
+  [1m[35mFixture Insert (0.1ms)[0m  INSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:10:34', '2015-11-06 17:10:34', 298486374)
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "pizza_places"[0m
+  [1m[35mFixture Insert (0.1ms)[0m  INSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:10:34', '2015-11-06 17:10:34', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:10:34', '2015-11-06 17:10:34', 298486374)[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "users"
+  [1m[36mFixture Insert (0.4ms)[0m  [1mINSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:10:34', '2015-11-06 17:10:34', 980190962)[0m
+PG::UndefinedColumn: ERROR:  column "pizza_place_id" of relation "users" does not exist
+LINE 1: ... "users" ("username", "email", "password_digest", "pizza_pla...
+                                                             ^
+: INSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:10:34', '2015-11-06 17:10:34', 980190962)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.6ms)[0m  [1mALTER TABLE "pizza_places_users" ENABLE TRIGGER ALL;ALTER TABLE "pizza_places" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "comments" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.6ms)[0m  ALTER TABLE "pizza_places_users" DISABLE TRIGGER ALL;ALTER TABLE "pizza_places" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "comments" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "comments"
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:10:34', '2015-11-06 17:10:34', 980190962)[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:10:34', '2015-11-06 17:10:34', 298486374)
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "pizza_places"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:10:34', '2015-11-06 17:10:34', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:10:34', '2015-11-06 17:10:34', 298486374)[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "users"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:10:34', '2015-11-06 17:10:34', 980190962)[0m
+PG::UndefinedColumn: ERROR:  column "pizza_place_id" of relation "users" does not exist
+LINE 1: ... "users" ("username", "email", "password_digest", "pizza_pla...
+                                                             ^
+: INSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:10:34', '2015-11-06 17:10:34', 980190962)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.6ms)[0m  [1mALTER TABLE "pizza_places_users" ENABLE TRIGGER ALL;ALTER TABLE "pizza_places" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "comments" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.6ms)[0m  ALTER TABLE "pizza_places_users" DISABLE TRIGGER ALL;ALTER TABLE "pizza_places" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "comments" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "comments"
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:10:34', '2015-11-06 17:10:34', 980190962)[0m
+  [1m[35mFixture Insert (0.1ms)[0m  INSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:10:34', '2015-11-06 17:10:34', 298486374)
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "pizza_places"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:10:34', '2015-11-06 17:10:34', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:10:34', '2015-11-06 17:10:34', 298486374)[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "users"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:10:34', '2015-11-06 17:10:34', 980190962)[0m
+PG::UndefinedColumn: ERROR:  column "pizza_place_id" of relation "users" does not exist
+LINE 1: ... "users" ("username", "email", "password_digest", "pizza_pla...
+                                                             ^
+: INSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:10:34', '2015-11-06 17:10:34', 980190962)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.7ms)[0m  [1mALTER TABLE "pizza_places_users" ENABLE TRIGGER ALL;ALTER TABLE "pizza_places" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "comments" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.6ms)[0m  ALTER TABLE "pizza_places_users" DISABLE TRIGGER ALL;ALTER TABLE "pizza_places" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "comments" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.4ms)[0m  DELETE FROM "comments"
+  [1m[36mFixture Insert (0.4ms)[0m  [1mINSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:10:34', '2015-11-06 17:10:34', 980190962)[0m
+  [1m[35mFixture Insert (0.1ms)[0m  INSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:10:34', '2015-11-06 17:10:34', 298486374)
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "pizza_places"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:10:34', '2015-11-06 17:10:34', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:10:34', '2015-11-06 17:10:34', 298486374)[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "users"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:10:34', '2015-11-06 17:10:34', 980190962)[0m
+PG::UndefinedColumn: ERROR:  column "pizza_place_id" of relation "users" does not exist
+LINE 1: ... "users" ("username", "email", "password_digest", "pizza_pla...
+                                                             ^
+: INSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:10:34', '2015-11-06 17:10:34', 980190962)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.7ms)[0m  [1mALTER TABLE "pizza_places_users" ENABLE TRIGGER ALL;ALTER TABLE "pizza_places" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "comments" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.6ms)[0m  ALTER TABLE "pizza_places_users" DISABLE TRIGGER ALL;ALTER TABLE "pizza_places" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "comments" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "comments"
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:10:34', '2015-11-06 17:10:34', 980190962)[0m
+  [1m[35mFixture Insert (0.1ms)[0m  INSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:10:34', '2015-11-06 17:10:34', 298486374)
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "pizza_places"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:10:34', '2015-11-06 17:10:34', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:10:34', '2015-11-06 17:10:34', 298486374)[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "users"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:10:34', '2015-11-06 17:10:34', 980190962)[0m
+PG::UndefinedColumn: ERROR:  column "pizza_place_id" of relation "users" does not exist
+LINE 1: ... "users" ("username", "email", "password_digest", "pizza_pla...
+                                                             ^
+: INSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:10:34', '2015-11-06 17:10:34', 980190962)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.7ms)[0m  [1mALTER TABLE "pizza_places_users" ENABLE TRIGGER ALL;ALTER TABLE "pizza_places" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "comments" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.8ms)[0m  ALTER TABLE "pizza_places_users" DISABLE TRIGGER ALL;ALTER TABLE "pizza_places" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "comments" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "comments"
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:10:34', '2015-11-06 17:10:34', 980190962)[0m
+  [1m[35mFixture Insert (0.1ms)[0m  INSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:10:34', '2015-11-06 17:10:34', 298486374)
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "pizza_places"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:10:34', '2015-11-06 17:10:34', 980190962)
+  [1m[36mFixture Insert (0.5ms)[0m  [1mINSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:10:34', '2015-11-06 17:10:34', 298486374)[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "users"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:10:34', '2015-11-06 17:10:34', 980190962)[0m
+PG::UndefinedColumn: ERROR:  column "pizza_place_id" of relation "users" does not exist
+LINE 1: ... "users" ("username", "email", "password_digest", "pizza_pla...
+                                                             ^
+: INSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:10:34', '2015-11-06 17:10:34', 980190962)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.6ms)[0m  [1mALTER TABLE "pizza_places_users" ENABLE TRIGGER ALL;ALTER TABLE "pizza_places" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "comments" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.8ms)[0m  ALTER TABLE "pizza_places_users" DISABLE TRIGGER ALL;ALTER TABLE "pizza_places" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "comments" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "comments"
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:10:34', '2015-11-06 17:10:34', 980190962)[0m
+  [1m[35mFixture Insert (0.1ms)[0m  INSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:10:34', '2015-11-06 17:10:34', 298486374)
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "pizza_places"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:10:34', '2015-11-06 17:10:34', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:10:34', '2015-11-06 17:10:34', 298486374)[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "users"
+  [1m[36mFixture Insert (0.4ms)[0m  [1mINSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:10:34', '2015-11-06 17:10:34', 980190962)[0m
+PG::UndefinedColumn: ERROR:  column "pizza_place_id" of relation "users" does not exist
+LINE 1: ... "users" ("username", "email", "password_digest", "pizza_pla...
+                                                             ^
+: INSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:10:34', '2015-11-06 17:10:34', 980190962)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.6ms)[0m  [1mALTER TABLE "pizza_places_users" ENABLE TRIGGER ALL;ALTER TABLE "pizza_places" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "comments" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.6ms)[0m  ALTER TABLE "pizza_places_users" DISABLE TRIGGER ALL;ALTER TABLE "pizza_places" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "comments" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "comments"
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:10:34', '2015-11-06 17:10:34', 980190962)[0m
+  [1m[35mFixture Insert (0.1ms)[0m  INSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:10:34', '2015-11-06 17:10:34', 298486374)
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "pizza_places"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:10:34', '2015-11-06 17:10:34', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:10:34', '2015-11-06 17:10:34', 298486374)[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "users"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:10:34', '2015-11-06 17:10:34', 980190962)[0m
+PG::UndefinedColumn: ERROR:  column "pizza_place_id" of relation "users" does not exist
+LINE 1: ... "users" ("username", "email", "password_digest", "pizza_pla...
+                                                             ^
+: INSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:10:34', '2015-11-06 17:10:34', 980190962)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.7ms)[0m  [1mALTER TABLE "pizza_places_users" ENABLE TRIGGER ALL;ALTER TABLE "pizza_places" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "comments" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.6ms)[0m  ALTER TABLE "pizza_places_users" DISABLE TRIGGER ALL;ALTER TABLE "pizza_places" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "comments" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "comments"
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:10:34', '2015-11-06 17:10:34', 980190962)[0m
+  [1m[35mFixture Insert (0.1ms)[0m  INSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:10:34', '2015-11-06 17:10:34', 298486374)
+  [1m[36mFixture Delete (0.3ms)[0m  [1mDELETE FROM "pizza_places"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:10:34', '2015-11-06 17:10:34', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:10:34', '2015-11-06 17:10:34', 298486374)[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "users"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:10:34', '2015-11-06 17:10:34', 980190962)[0m
+PG::UndefinedColumn: ERROR:  column "pizza_place_id" of relation "users" does not exist
+LINE 1: ... "users" ("username", "email", "password_digest", "pizza_pla...
+                                                             ^
+: INSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:10:34', '2015-11-06 17:10:34', 980190962)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.6ms)[0m  [1mALTER TABLE "pizza_places_users" ENABLE TRIGGER ALL;ALTER TABLE "pizza_places" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "comments" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (1.2ms)[0m  ALTER TABLE "pizza_places_users" DISABLE TRIGGER ALL;ALTER TABLE "pizza_places" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "comments" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.3ms)[0m  DELETE FROM "comments"
+  [1m[36mFixture Insert (0.5ms)[0m  [1mINSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:11:51', '2015-11-06 17:11:51', 980190962)[0m
+  [1m[35mFixture Insert (0.3ms)[0m  INSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:11:51', '2015-11-06 17:11:51', 298486374)
+  [1m[36mFixture Delete (0.3ms)[0m  [1mDELETE FROM "pizza_places"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:11:51', '2015-11-06 17:11:51', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:11:51', '2015-11-06 17:11:51', 298486374)[0m
+  [1m[35mFixture Delete (0.5ms)[0m  DELETE FROM "users"
+  [1m[36mFixture Insert (0.5ms)[0m  [1mINSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:11:51', '2015-11-06 17:11:51', 980190962)[0m
+PG::UndefinedColumn: ERROR:  column "pizza_place_id" of relation "users" does not exist
+LINE 1: ... "users" ("username", "email", "password_digest", "pizza_pla...
+                                                             ^
+: INSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:11:51', '2015-11-06 17:11:51', 980190962)
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.8ms)[0m  [1mALTER TABLE "pizza_places_users" ENABLE TRIGGER ALL;ALTER TABLE "pizza_places" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "comments" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.7ms)[0m  ALTER TABLE "pizza_places_users" DISABLE TRIGGER ALL;ALTER TABLE "pizza_places" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "comments" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.3ms)[0m  DELETE FROM "comments"
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:11:51', '2015-11-06 17:11:51', 980190962)[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:11:51', '2015-11-06 17:11:51', 298486374)
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "pizza_places"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:11:51', '2015-11-06 17:11:51', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:11:51', '2015-11-06 17:11:51', 298486374)[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "users"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:11:51', '2015-11-06 17:11:51', 980190962)[0m
+PG::UndefinedColumn: ERROR:  column "pizza_place_id" of relation "users" does not exist
+LINE 1: ... "users" ("username", "email", "password_digest", "pizza_pla...
+                                                             ^
+: INSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:11:51', '2015-11-06 17:11:51', 980190962)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.6ms)[0m  [1mALTER TABLE "pizza_places_users" ENABLE TRIGGER ALL;ALTER TABLE "pizza_places" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "comments" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.7ms)[0m  ALTER TABLE "pizza_places_users" DISABLE TRIGGER ALL;ALTER TABLE "pizza_places" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "comments" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "comments"
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:11:51', '2015-11-06 17:11:51', 980190962)[0m
+  [1m[35mFixture Insert (0.1ms)[0m  INSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:11:51', '2015-11-06 17:11:51', 298486374)
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "pizza_places"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:11:51', '2015-11-06 17:11:51', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:11:51', '2015-11-06 17:11:51', 298486374)[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "users"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:11:51', '2015-11-06 17:11:51', 980190962)[0m
+PG::UndefinedColumn: ERROR:  column "pizza_place_id" of relation "users" does not exist
+LINE 1: ... "users" ("username", "email", "password_digest", "pizza_pla...
+                                                             ^
+: INSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:11:51', '2015-11-06 17:11:51', 980190962)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.6ms)[0m  [1mALTER TABLE "pizza_places_users" ENABLE TRIGGER ALL;ALTER TABLE "pizza_places" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "comments" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.6ms)[0m  ALTER TABLE "pizza_places_users" DISABLE TRIGGER ALL;ALTER TABLE "pizza_places" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "comments" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "comments"
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:11:51', '2015-11-06 17:11:51', 980190962)[0m
+  [1m[35mFixture Insert (0.1ms)[0m  INSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:11:51', '2015-11-06 17:11:51', 298486374)
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "pizza_places"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:11:51', '2015-11-06 17:11:51', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:11:51', '2015-11-06 17:11:51', 298486374)[0m
+  [1m[35mFixture Delete (0.3ms)[0m  DELETE FROM "users"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:11:51', '2015-11-06 17:11:51', 980190962)[0m
+PG::UndefinedColumn: ERROR:  column "pizza_place_id" of relation "users" does not exist
+LINE 1: ... "users" ("username", "email", "password_digest", "pizza_pla...
+                                                             ^
+: INSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:11:51', '2015-11-06 17:11:51', 980190962)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.6ms)[0m  [1mALTER TABLE "pizza_places_users" ENABLE TRIGGER ALL;ALTER TABLE "pizza_places" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "comments" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.7ms)[0m  ALTER TABLE "pizza_places_users" DISABLE TRIGGER ALL;ALTER TABLE "pizza_places" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "comments" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "comments"
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:11:51', '2015-11-06 17:11:51', 980190962)[0m
+  [1m[35mFixture Insert (0.1ms)[0m  INSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:11:51', '2015-11-06 17:11:51', 298486374)
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "pizza_places"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:11:51', '2015-11-06 17:11:51', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:11:51', '2015-11-06 17:11:51', 298486374)[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "users"
+  [1m[36mFixture Insert (0.4ms)[0m  [1mINSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:11:51', '2015-11-06 17:11:51', 980190962)[0m
+PG::UndefinedColumn: ERROR:  column "pizza_place_id" of relation "users" does not exist
+LINE 1: ... "users" ("username", "email", "password_digest", "pizza_pla...
+                                                             ^
+: INSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:11:51', '2015-11-06 17:11:51', 980190962)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.6ms)[0m  [1mALTER TABLE "pizza_places_users" ENABLE TRIGGER ALL;ALTER TABLE "pizza_places" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "comments" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.6ms)[0m  ALTER TABLE "pizza_places_users" DISABLE TRIGGER ALL;ALTER TABLE "pizza_places" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "comments" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "comments"
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:11:51', '2015-11-06 17:11:51', 980190962)[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:11:51', '2015-11-06 17:11:51', 298486374)
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "pizza_places"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:11:51', '2015-11-06 17:11:51', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:11:51', '2015-11-06 17:11:51', 298486374)[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "users"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:11:51', '2015-11-06 17:11:51', 980190962)[0m
+PG::UndefinedColumn: ERROR:  column "pizza_place_id" of relation "users" does not exist
+LINE 1: ... "users" ("username", "email", "password_digest", "pizza_pla...
+                                                             ^
+: INSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:11:51', '2015-11-06 17:11:51', 980190962)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.6ms)[0m  [1mALTER TABLE "pizza_places_users" ENABLE TRIGGER ALL;ALTER TABLE "pizza_places" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "comments" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.7ms)[0m  ALTER TABLE "pizza_places_users" DISABLE TRIGGER ALL;ALTER TABLE "pizza_places" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "comments" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "comments"
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:11:51', '2015-11-06 17:11:51', 980190962)[0m
+  [1m[35mFixture Insert (0.1ms)[0m  INSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:11:51', '2015-11-06 17:11:51', 298486374)
+  [1m[36mFixture Delete (0.3ms)[0m  [1mDELETE FROM "pizza_places"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:11:51', '2015-11-06 17:11:51', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:11:51', '2015-11-06 17:11:51', 298486374)[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "users"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:11:51', '2015-11-06 17:11:51', 980190962)[0m
+PG::UndefinedColumn: ERROR:  column "pizza_place_id" of relation "users" does not exist
+LINE 1: ... "users" ("username", "email", "password_digest", "pizza_pla...
+                                                             ^
+: INSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:11:51', '2015-11-06 17:11:51', 980190962)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.6ms)[0m  [1mALTER TABLE "pizza_places_users" ENABLE TRIGGER ALL;ALTER TABLE "pizza_places" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "comments" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.6ms)[0m  ALTER TABLE "pizza_places_users" DISABLE TRIGGER ALL;ALTER TABLE "pizza_places" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "comments" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.3ms)[0m  DELETE FROM "comments"
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:11:51', '2015-11-06 17:11:51', 980190962)[0m
+  [1m[35mFixture Insert (0.1ms)[0m  INSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:11:51', '2015-11-06 17:11:51', 298486374)
+  [1m[36mFixture Delete (0.3ms)[0m  [1mDELETE FROM "pizza_places"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:11:51', '2015-11-06 17:11:51', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:11:51', '2015-11-06 17:11:51', 298486374)[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "users"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:11:51', '2015-11-06 17:11:51', 980190962)[0m
+PG::UndefinedColumn: ERROR:  column "pizza_place_id" of relation "users" does not exist
+LINE 1: ... "users" ("username", "email", "password_digest", "pizza_pla...
+                                                             ^
+: INSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:11:51', '2015-11-06 17:11:51', 980190962)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.6ms)[0m  [1mALTER TABLE "pizza_places_users" ENABLE TRIGGER ALL;ALTER TABLE "pizza_places" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "comments" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.7ms)[0m  ALTER TABLE "pizza_places_users" DISABLE TRIGGER ALL;ALTER TABLE "pizza_places" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "comments" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "comments"
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:11:51', '2015-11-06 17:11:51', 980190962)[0m
+  [1m[35mFixture Insert (0.1ms)[0m  INSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:11:51', '2015-11-06 17:11:51', 298486374)
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "pizza_places"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:11:51', '2015-11-06 17:11:51', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:11:51', '2015-11-06 17:11:51', 298486374)[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "users"
+  [1m[36mFixture Insert (0.4ms)[0m  [1mINSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:11:51', '2015-11-06 17:11:51', 980190962)[0m
+PG::UndefinedColumn: ERROR:  column "pizza_place_id" of relation "users" does not exist
+LINE 1: ... "users" ("username", "email", "password_digest", "pizza_pla...
+                                                             ^
+: INSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:11:51', '2015-11-06 17:11:51', 980190962)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.6ms)[0m  [1mALTER TABLE "pizza_places_users" ENABLE TRIGGER ALL;ALTER TABLE "pizza_places" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "comments" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m
+  [1m[35m (0.6ms)[0m  ALTER TABLE "pizza_places_users" DISABLE TRIGGER ALL;ALTER TABLE "pizza_places" DISABLE TRIGGER ALL;ALTER TABLE "users" DISABLE TRIGGER ALL;ALTER TABLE "comments" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "comments"
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:11:51', '2015-11-06 17:11:51', 980190962)[0m
+  [1m[35mFixture Insert (0.1ms)[0m  INSERT INTO "comments" ("body", "pizza_place_id", "user_id", "created_at", "updated_at", "id") VALUES ('MyText', NULL, NULL, '2015-11-06 17:11:51', '2015-11-06 17:11:51', 298486374)
+  [1m[36mFixture Delete (0.2ms)[0m  [1mDELETE FROM "pizza_places"[0m
+  [1m[35mFixture Insert (0.2ms)[0m  INSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:11:51', '2015-11-06 17:11:51', 980190962)
+  [1m[36mFixture Insert (0.2ms)[0m  [1mINSERT INTO "pizza_places" ("name", "address", "city", "state", "zipcode", "phone", "rating", "website", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', 'MyString', 1, 'MyString', 1, 'MyString', '2015-11-06 17:11:51', '2015-11-06 17:11:51', 298486374)[0m
+  [1m[35mFixture Delete (0.2ms)[0m  DELETE FROM "users"
+  [1m[36mFixture Insert (0.3ms)[0m  [1mINSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:11:51', '2015-11-06 17:11:51', 980190962)[0m
+PG::UndefinedColumn: ERROR:  column "pizza_place_id" of relation "users" does not exist
+LINE 1: ... "users" ("username", "email", "password_digest", "pizza_pla...
+                                                             ^
+: INSERT INTO "users" ("username", "email", "password_digest", "pizza_place_id", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 'MyString', NULL, '2015-11-06 17:11:51', '2015-11-06 17:11:51', 980190962)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.8ms)[0m  [1mALTER TABLE "pizza_places_users" ENABLE TRIGGER ALL;ALTER TABLE "pizza_places" ENABLE TRIGGER ALL;ALTER TABLE "users" ENABLE TRIGGER ALL;ALTER TABLE "comments" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL[0m

@@ -1,2 +1,11 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<div id="user-page">
+  <% flash.each do |message_type, message| %>
+    <div class="alert alert-<%= message_type %>"><h1><%= message %></h1></div>
+  <% end %>
+  <h1>Hope your having a great day <%= @user.username%></h1><br>
+
+  <h1>I would rather you stick around but if you want to delete your account click below</h1><br><br>
+
+  <%= button_to 'DELETE', @user, :method => :delete %>
+
+</div>

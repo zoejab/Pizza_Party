@@ -8,6 +8,14 @@
 </head>
 <body>
 
+  <% if logged_in? %>
+  <div id="logout">
+    <%= link_to 'Logout', logout_path, :method => :delete %>
+  <% else %>
+    <%= link_to 'Login', login_path %>
+  </div>
+  <% end %>
+
  <img class="logo" src="http://i65.tinypic.com/125tlqp.png" alt="" />
 
 <%= yield %>
