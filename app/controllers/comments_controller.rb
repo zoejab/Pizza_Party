@@ -4,8 +4,13 @@ class CommentsController < ApplicationController
     def create
       @comment = Comment.new(comment_params)
       @comment.pizza_place_id = params[:pizza_place_id]
-      @comment.save
+      @comment.user_id = current_user.id
+
+      if @comment.save
       redirect_to pizza_place_path(@comment.pizza_place)
+      else
+        flash.now[:danger] = "error"
+      end
     end
 
     def new

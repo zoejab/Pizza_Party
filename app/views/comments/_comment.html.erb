@@ -3,6 +3,10 @@
   <p class="timestamp"><%= time_ago_in_words(comment.created_at) %>
      ago</p>
 
+  <p class="username">
+      Posted By <%= User.find(comment.user_id).username %>
+  </p>
+
   <p class="comment"><%= comment.body %></p>
 
 
