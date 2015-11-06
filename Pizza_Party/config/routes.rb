@@ -7,7 +7,8 @@ Rails.application.routes.draw do
   delete 'logout' => "sessions#destroy"
 
   root to: "pizza_places#index"
-resources :pizza_places do
+
+  resources :pizza_places do
   resources :comments
 
 
