@@ -20,8 +20,7 @@ class CommentsController < ApplicationController
 
     def edit
       @comment = Comment.find(params[:id])
-      @pizza_place = PizzaPlace.find(params[:pizza_place_id])
-      redirect_to edit_pizza_place_comment_path
+      # @pizza_place = PizzaPlace.find(params[:pizza_place_id])
     end
 
     def update
