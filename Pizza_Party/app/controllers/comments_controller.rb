@@ -20,19 +20,24 @@ class CommentsController < ApplicationController
 
     def edit
       @comment = Comment.find(params[:id])
+      @pizza_place = PizzaPlace.find(params[:pizza_place_id])
+      redirect_to edit_pizza_place_comment_path
     end
 
     def update
+      @pizza_place = PizzaPlace.find(params[:pizza_place_id])
       @comment = Comment.find(params[:id])
       @comment.update(comment_params)
 
-      redirect_to pizza_place_path(@comment)
+      redirect_to
+      pizza_place_path(@pizza_place)
     end
 
     def destroy
+      @pizza_place = PizzaPlace.find(params[:pizza_place_id])
       @comment = Comment.find(params[:id])
       @comment.destroy
-      redirect_to pizza_place_path
+      redirect_to pizza_place_path(@pizza_place)
       # # @pizza_place = PizzaPlace.find(params[:id])
       # redirect_to pizza_place_path(@pizza_place.id)
     end
