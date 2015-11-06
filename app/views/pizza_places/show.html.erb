@@ -1,0 +1,17 @@
+<%= link_to "<< Back to Pizza Places", pizza_places_path %>
+
+<h1><%= @pizza_place.name %></h1>
+
+<ul class="information">
+  <li>Address: <%=@pizza_place.address %></li>
+  <li>Phone: <%= @pizza_place.phone %> </li>
+  <li>Rating: <%= @pizza_place.rating %> </li>
+  <li><a href="http://<%= @pizza_place.website %>"> Website </a></li>
+</ul>
+
+
+<h3> Comments </h3>
+
+<%= render partial: 'comments/form'%>
+
+<%= render partial: 'comments/comment', collection: @pizza_place.comments %>
