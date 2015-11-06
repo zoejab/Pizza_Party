@@ -12,6 +12,9 @@
 
 <h3> Comments </h3>
 
+<% if logged_in? %>
 <%= render partial: 'comments/form'%>
+
+<% end %>
 
 <%= render partial: 'comments/comment', collection: @pizza_place.comments %>

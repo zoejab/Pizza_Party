@@ -1,5 +1,7 @@
 class CommentsController < ApplicationController
 
+before_filter :require_login, except: [:show]
+
     def create
       @comment = Comment.new(comment_params)
       @comment.pizza_place_id = params[:pizza_place_id]
