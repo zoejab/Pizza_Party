@@ -3033,3 +3033,227 @@ Processing by PizzaPlacesController#show as HTML
   Rendered comments/_comment.html.erb (1.5ms)
   Rendered pizza_places/show.html.erb within layouts/application (7.4ms)
 Completed 200 OK in 79ms (Views: 77.0ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/pizza_places/5/comments/24/edit" for ::1 at 2015-11-06 11:18:35 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by CommentsController#edit as HTML
+  Parameters: {"pizza_place_id"=>"5", "id"=>"24"}
+  [1m[35mComment Load (0.7ms)[0m  SELECT  "comments".* FROM "comments" WHERE "comments"."id" = $1 LIMIT 1  [["id", 24]]
+  Rendered comments/edit.html.erb within layouts/application (34.6ms)
+Completed 200 OK in 651ms (Views: 568.9ms | ActiveRecord: 3.8ms)
+
+
+Started POST "/pizza_places/5/comments/24/edit" for ::1 at 2015-11-06 11:18:39 -0500
+Processing by CommentsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"KKG3o4niqG+/ZFAFDuEvp1lMTjRlgu6E33BACXB67yy74YQ9DNZgjao+7y/CFT48wGyj+dEtdirwKSw39nL6Sw==", "comment"=>{"body"=>"hi there"}, "commit"=>"Submit", "pizza_place_id"=>"5", "id"=>"24"}
+  [1m[36mPizzaPlace Load (0.3ms)[0m  [1mSELECT  "pizza_places".* FROM "pizza_places" WHERE "pizza_places"."id" = $1 LIMIT 1[0m  [["id", 5]]
+  [1m[35mComment Load (0.3ms)[0m  SELECT  "comments".* FROM "comments" WHERE "comments"."id" = $1 LIMIT 1  [["id", 24]]
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  UPDATE "comments" SET "body" = $1, "updated_at" = $2 WHERE "comments"."id" = $3  [["body", "hi there"], ["updated_at", "2015-11-06 16:18:39.497738"], ["id", 24]]
+  [1m[36m (46.8ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/pizza_places/5
+Completed 302 Found in 119ms (ActiveRecord: 49.2ms)
+
+
+Started GET "/pizza_places/5" for ::1 at 2015-11-06 11:18:39 -0500
+Processing by PizzaPlacesController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[35mPizzaPlace Load (0.3ms)[0m  SELECT  "pizza_places".* FROM "pizza_places" WHERE "pizza_places"."id" = $1 LIMIT 1  [["id", 5]]
+  Rendered comments/_form.html.erb (55.4ms)
+  [1m[36mComment Load (0.2ms)[0m  [1mSELECT "comments".* FROM "comments" WHERE "comments"."pizza_place_id" = $1[0m  [["pizza_place_id", 5]]
+  Rendered comments/_comment.html.erb (76.7ms)
+  Rendered pizza_places/show.html.erb within layouts/application (304.8ms)
+Completed 200 OK in 378ms (Views: 376.4ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/pizza_places" for ::1 at 2015-11-06 11:18:44 -0500
+Processing by PizzaPlacesController#index as HTML
+  [1m[35mPizzaPlace Load (0.4ms)[0m  SELECT "pizza_places".* FROM "pizza_places"
+  Rendered pizza_places/index.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 111ms (Views: 110.0ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/pizza_places" for ::1 at 2015-11-06 11:18:48 -0500
+Processing by PizzaPlacesController#index as HTML
+  [1m[36mPizzaPlace Load (0.3ms)[0m  [1mSELECT "pizza_places".* FROM "pizza_places"[0m
+  Rendered pizza_places/index.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 57ms (Views: 56.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/pizza_places.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2015-11-06 11:18:48 -0500
+
+
+Started GET "/assets/comments.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2015-11-06 11:18:48 -0500
+
+
+Started GET "/assets/sessions.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2015-11-06 11:18:48 -0500
+
+
+Started GET "/assets/users.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2015-11-06 11:18:48 -0500
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for ::1 at 2015-11-06 11:18:48 -0500
+
+
+Started GET "/assets/application.self-f79de0708fd2b557dffd245f882d2ed51b46c418026d95e29b0fd188e09803d8.css?body=1" for ::1 at 2015-11-06 11:18:48 -0500
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for ::1 at 2015-11-06 11:18:48 -0500
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2015-11-06 11:18:48 -0500
+
+
+Started GET "/assets/comments.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-06 11:18:48 -0500
+
+
+Started GET "/assets/pizza_places.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-06 11:18:48 -0500
+
+
+Started GET "/assets/sessions.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-06 11:18:48 -0500
+
+
+Started GET "/assets/users.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-06 11:18:48 -0500
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for ::1 at 2015-11-06 11:18:48 -0500
+
+
+Started GET "/pizza_places" for ::1 at 2015-11-06 11:26:23 -0500
+Processing by PizzaPlacesController#index as HTML
+  [1m[35mPizzaPlace Load (0.3ms)[0m  SELECT "pizza_places".* FROM "pizza_places"
+  Rendered pizza_places/index.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 68ms (Views: 67.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/comments.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2015-11-06 11:26:24 -0500
+
+
+Started GET "/assets/users.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2015-11-06 11:26:24 -0500
+
+
+Started GET "/assets/sessions.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2015-11-06 11:26:24 -0500
+
+
+Started GET "/assets/pizza_places.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2015-11-06 11:26:24 -0500
+
+
+Started GET "/assets/application.self-f79de0708fd2b557dffd245f882d2ed51b46c418026d95e29b0fd188e09803d8.css?body=1" for ::1 at 2015-11-06 11:26:24 -0500
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for ::1 at 2015-11-06 11:26:24 -0500
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for ::1 at 2015-11-06 11:26:24 -0500
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2015-11-06 11:26:24 -0500
+
+
+Started GET "/assets/comments.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-06 11:26:24 -0500
+
+
+Started GET "/assets/pizza_places.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-06 11:26:24 -0500
+
+
+Started GET "/assets/sessions.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-06 11:26:24 -0500
+
+
+Started GET "/assets/users.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-06 11:26:24 -0500
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for ::1 at 2015-11-06 11:26:24 -0500
+
+
+Started GET "/pizza_places/5" for ::1 at 2015-11-06 11:26:24 -0500
+Processing by PizzaPlacesController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mPizzaPlace Load (0.3ms)[0m  [1mSELECT  "pizza_places".* FROM "pizza_places" WHERE "pizza_places"."id" = $1 LIMIT 1[0m  [["id", 5]]
+  Rendered comments/_form.html.erb (1.2ms)
+  [1m[35mComment Load (0.4ms)[0m  SELECT "comments".* FROM "comments" WHERE "comments"."pizza_place_id" = $1  [["pizza_place_id", 5]]
+  Rendered comments/_comment.html.erb (2.5ms)
+  Rendered pizza_places/show.html.erb within layouts/application (9.4ms)
+Completed 200 OK in 71ms (Views: 68.7ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/pizza_places" for ::1 at 2015-11-06 11:26:26 -0500
+Processing by PizzaPlacesController#index as HTML
+  [1m[36mPizzaPlace Load (0.5ms)[0m  [1mSELECT "pizza_places".* FROM "pizza_places"[0m
+  Rendered pizza_places/index.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 64ms (Views: 62.2ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/pizza_places" for ::1 at 2015-11-06 11:30:52 -0500
+Processing by PizzaPlacesController#index as HTML
+  [1m[35mPizzaPlace Load (0.4ms)[0m  SELECT "pizza_places".* FROM "pizza_places"
+  Rendered pizza_places/index.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 52ms (Views: 51.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/assets/users.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2015-11-06 11:30:53 -0500
+
+
+Started GET "/assets/sessions.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2015-11-06 11:30:53 -0500
+
+
+Started GET "/assets/pizza_places.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2015-11-06 11:30:53 -0500
+
+
+Started GET "/assets/application.self-f79de0708fd2b557dffd245f882d2ed51b46c418026d95e29b0fd188e09803d8.css?body=1" for ::1 at 2015-11-06 11:30:53 -0500
+
+
+Started GET "/assets/comments.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2015-11-06 11:30:53 -0500
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for ::1 at 2015-11-06 11:30:53 -0500
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for ::1 at 2015-11-06 11:30:53 -0500
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2015-11-06 11:30:53 -0500
+
+
+Started GET "/assets/comments.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-06 11:30:53 -0500
+
+
+Started GET "/assets/pizza_places.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-06 11:30:53 -0500
+
+
+Started GET "/assets/sessions.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-06 11:30:53 -0500
+
+
+Started GET "/assets/users.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-06 11:30:53 -0500
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for ::1 at 2015-11-06 11:30:53 -0500
+
+
+Started GET "/pizza_places/5" for ::1 at 2015-11-06 11:30:54 -0500
+Processing by PizzaPlacesController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mPizzaPlace Load (0.3ms)[0m  [1mSELECT  "pizza_places".* FROM "pizza_places" WHERE "pizza_places"."id" = $1 LIMIT 1[0m  [["id", 5]]
+  Rendered comments/_form.html.erb (0.6ms)
+  [1m[35mComment Load (0.3ms)[0m  SELECT "comments".* FROM "comments" WHERE "comments"."pizza_place_id" = $1  [["pizza_place_id", 5]]
+  Rendered comments/_comment.html.erb (1.2ms)
+  Rendered pizza_places/show.html.erb within layouts/application (6.5ms)
+Completed 200 OK in 61ms (Views: 59.6ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/pizza_places" for ::1 at 2015-11-06 11:31:02 -0500
+Processing by PizzaPlacesController#index as HTML
+  [1m[36mPizzaPlace Load (0.4ms)[0m  [1mSELECT "pizza_places".* FROM "pizza_places"[0m
+  Rendered pizza_places/index.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 57ms (Views: 55.5ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/pizza_places/5" for ::1 at 2015-11-06 11:31:37 -0500
+Processing by PizzaPlacesController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[35mPizzaPlace Load (0.3ms)[0m  SELECT  "pizza_places".* FROM "pizza_places" WHERE "pizza_places"."id" = $1 LIMIT 1  [["id", 5]]
+  Rendered comments/_form.html.erb (0.6ms)
+  [1m[36mComment Load (0.4ms)[0m  [1mSELECT "comments".* FROM "comments" WHERE "comments"."pizza_place_id" = $1[0m  [["pizza_place_id", 5]]
+  Rendered comments/_comment.html.erb (1.6ms)
+  Rendered pizza_places/show.html.erb within layouts/application (7.5ms)
+Completed 200 OK in 61ms (Views: 58.5ms | ActiveRecord: 0.7ms)
