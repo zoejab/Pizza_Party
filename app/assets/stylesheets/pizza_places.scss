@@ -2,8 +2,60 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+// hover taken from: http://www.cssscript.com/demo/transparent-image-hover-overlay-with-pure-css-css3/
+
 #pizza-index{
-  margin-top: 200px;
+  margin-top: 100px;
   background: white;
   position: absolute;
 }
+
+#pizza-index li {
+  text-decoration: none;
+  list-style-type: none;
+  display: inline-block;
+  padding-bottom: 10px;
+}
+
+#pizza-index img {
+  width: 300px;
+  height: 200px;
+  box-sizing: border-box;
+  border: solid 4px black;
+  border-radius: 15px;
+}
+
+#pizza-index h2 {;
+  margin-top: 75px;
+}
+
+#pizza-index a {
+  color: white;
+  text-decoration: none
+}
+
+.media {
+  display: inline-block;
+  position: relative;
+  vertical-align: top;
+}
+
+.media_image { display: block; }
+
+.media_body {
+  background: rgba(0, 0, 0, 0.7);
+  bottom: 0;
+  color: white;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  right: 0;
+  -webkit-transition: 0.6s;
+  transition: 0.6s;
+  box-sizing: border-box;
+  border-radius: 15px;
+}
+
+.media_body:hover { opacity: 1; }

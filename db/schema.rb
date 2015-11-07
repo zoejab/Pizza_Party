@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 20151107151549) do
     t.datetime "updated_at",   null: false
     t.string   "neighborhood"
     t.string   "image_url"
+    t.string   "item"
   end
 
   create_table "pizza_places_users", id: false, force: :cascade do |t|

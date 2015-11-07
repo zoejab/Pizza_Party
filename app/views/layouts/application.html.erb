@@ -4,6 +4,7 @@
   <title>PizzaParty</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -13,6 +14,7 @@
   <img class="logo" src="http://i65.tinypic.com/125tlqp.png" alt="" />
 </a>
 
+<h2> Can you join <i>THE</i> Pizza Party? </h2>
 
   <% if logged_in? %>
   <div class="log-status">
@@ -31,6 +33,7 @@
 
 
 </body>
+
 </html>
 
 <!-- /Users/zoejablow/desktop/pizza_party/Pizza_Party/app/views/layouts/application.html.erb
