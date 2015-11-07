@@ -9,6 +9,17 @@
   <li><a href="http://<%= @pizza_place.website %>"> Website </a></li>
 </ul>
 
+<% if logged_in? %>
+
+<%- unless current_user.favorite_pizza_places.exists?(id: @pizza_place.id) -%>
+
+<%= link_to "I've Been There!", favorite_pizza_places_path(pizza_place_id: @pizza_place), method: :post %>
+<%- else -%>
+<%= link_to 'Remove from favorites', favorite_pizza_place_path(@pizza_place), method: :delete %>
+<%- end -%>
+<%- end -%>
+
+
 
 <h3> Comments </h3>
 

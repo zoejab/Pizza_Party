@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151105200404) do
+ActiveRecord::Schema.define(version: 20151107151549) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,17 +27,26 @@ ActiveRecord::Schema.define(version: 20151105200404) do
   add_index "comments", ["pizza_place_id"], name: "index_comments_on_pizza_place_id", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
+  create_table "favorites", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "favorited_id"
+    t.string   "favorited_type"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "favorites", ["favorited_type", "favorited_id"], name: "index_favorites_on_favorited_type_and_favorited_id", using: :btree
+  add_index "favorites", ["user_id"], name: "index_favorites_on_user_id", using: :btree
+
   create_table "pizza_places", force: :cascade do |t|
     t.string   "name"
     t.string   "address"
-    t.string   "city"
-    t.string   "state"
-    t.integer  "zipcode"
     t.string   "phone"
-    t.integer  "rating"
     t.string   "website"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "neighborhood"
+    t.string   "image_url"
   end
 
   create_table "pizza_places_users", id: false, force: :cascade do |t|
@@ -55,4 +64,5 @@ ActiveRecord::Schema.define(version: 20151105200404) do
 
   add_foreign_key "comments", "pizza_places"
   add_foreign_key "comments", "users"
+  add_foreign_key "favorites", "users"
 end

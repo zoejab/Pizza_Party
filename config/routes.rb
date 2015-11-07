@@ -1,18 +1,20 @@
 Rails.application.routes.draw do
 
-  resources :users
-
   get 'login' => "sessions#new"
   post 'login' => "sessions#create"
   delete 'logout' => "sessions#destroy"
 
   root to: "pizza_places#index"
+
+  resources :favorite_pizza_places, only: [:create, :destroy]
+  resources :users
   
+
   resources :pizza_places do
   resources :comments
   end
 
-  post  '/pizza_places/:pizza_place_id/comments/:id/edit' => "comments#update"
+  post '/pizza_places/:pizza_place_id/comments/:id/edit' => "comments#update"
 
 
   # member do

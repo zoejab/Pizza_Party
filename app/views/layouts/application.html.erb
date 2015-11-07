@@ -7,20 +7,20 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+
+<a href="/pizza_places/">
   <img class="logo" src="http://i65.tinypic.com/125tlqp.png" alt="" />
+</a>
 
 
   <% if logged_in? %>
-    <div id="logout">
-      <%= link_to 'Logout', logout_path, :method => :delete %> </div>
-      <%= "You are logged in as #{current_user.username}" %>
-
+  <div id="logout">
+    <%= link_to 'Logout', logout_path, :method => :delete %> </div>
+    You are logged in as <%= link_to current_user.username, user_path(current_user.id) %>.
   <% else %>
-
-    <div id="login">
-      <%= link_to 'Login', login_path %>
-    </div>
-
+  <div id="login">
+    <%= link_to 'Login', login_path %>
+  </div>
   <% end %>
 
 

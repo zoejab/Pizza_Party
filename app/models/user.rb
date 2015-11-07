@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   has_and_belongs_to_many :pizza_places
   has_many :comments
+  has_many :favorites
+  has_many :favorite_pizza_places, through: :favorites, source: :favorited, source_type: "PizzaPlace"
 
   has_secure_password
 

@@ -4,19 +4,13 @@
      ago</p>
 
   <p class="username">
-      Posted By <%= User.find(comment.user_id).username %>
+      Posted By <%= link_to User.find(comment.user_id).username, user_path(comment.user_id) %>
   </p>
 
   <p class="comment"><%= comment.body %></p>
 
-
-<!-- <%#= link_to "Delete", pizza_place_comment_path(comment.id), method: :delete, data: {confirm: "Really delete the comment?"} %><br> -->
-<!--
-<%#= link_to "Edit", edit_pizza_place_comment_path(@pizza_place.id, comment.id) %> -->
-
-<!-- <%#= link_to "Edit", edit_pizza_place_comment_path(:id, :pizza_place_id) %> -->
-<% if logged_in? %>
-
+<!-- IF CURRENT USER IS LOGGED IN THEN LET THEM EDIT THEIR COMMENTS -->
+<% if logged_in? && current_user.id == comment.user_id %>
   <%= link_to 'DELETE', pizza_place_comment_path(comment.pizza_place_id, comment.id), :method => :delete %>
 
   <%=  link_to 'EDIT', edit_pizza_place_comment_path(comment.pizza_place_id, comment.id) %>
