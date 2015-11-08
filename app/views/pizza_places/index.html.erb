@@ -1,15 +1,16 @@
 <div id="pizza-index">
 <ul>
+
   <h2> The Best Pizza Places in New York </h2>
-  <h4> According to TimeOut Magazine </h4>
+  <h4> According to Time Out Magazine </h4>
 <% @pizza_places.each do |place| %>
 
 <li>
-<div class="media">
+<div class="pizza-places">
 
-   <img class="media_image" src="<%=place.image_url%>"/>
+   <img class="pizza-picture" src="<%=place.image_url%>"/>
 
-  <div class="media_body">
+  <div class="pizza-place-name">
     <h2> <%= link_to place.name, pizza_place_path(place), id: "pizza_place_#{place.id}" %>
  </h2>
   </div>

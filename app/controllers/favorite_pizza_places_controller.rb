@@ -1,4 +1,5 @@
 class FavoritePizzaPlacesController < ApplicationController
+
   before_action :set_pizza_place
 
   def create

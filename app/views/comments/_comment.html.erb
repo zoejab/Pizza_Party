@@ -1,19 +1,23 @@
-<div>
+<div class="post-comment">
+<hr>
 
-  <p class="timestamp"><%= time_ago_in_words(comment.created_at) %>
+<p class="username">
+    Review By <%= link_to User.find(comment.user_id).username, user_path(comment.user_id) %>
+</p>
+
+  <p class="timestamp"> Posted <%= time_ago_in_words(comment.created_at) %>
      ago</p>
 
-  <p class="username">
-      Posted By <%= link_to User.find(comment.user_id).username, user_path(comment.user_id) %>
-  </p>
+     <!-- IF CURRENT USER IS LOGGED IN THEN LET THEM EDIT THEIR COMMENTS -->
+     <% if logged_in? && current_user.id == comment.user_id %>
+       <%= link_to 'DELETE', pizza_place_comment_path(comment.pizza_place_id, comment.id), :method => :delete, :class => "comment-options" %>
+
+       <%=  link_to 'EDIT', edit_pizza_place_comment_path(comment.pizza_place_id, comment.id),:class => "comment-options" %>
+
+     <% end %>
+
 
   <p class="comment"><%= comment.body %></p>
 
-<!-- IF CURRENT USER IS LOGGED IN THEN LET THEM EDIT THEIR COMMENTS -->
-<% if logged_in? && current_user.id == comment.user_id %>
-  <%= link_to 'DELETE', pizza_place_comment_path(comment.pizza_place_id, comment.id), :method => :delete %>
 
-  <%=  link_to 'EDIT', edit_pizza_place_comment_path(comment.pizza_place_id, comment.id) %>
-
-<% end %>
 </div>

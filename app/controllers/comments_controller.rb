@@ -1,6 +1,5 @@
 class CommentsController < ApplicationController
 
-
     def create
       @comment = Comment.new(comment_params)
       @comment.pizza_place_id = params[:pizza_place_id]
@@ -34,6 +33,7 @@ class CommentsController < ApplicationController
       @pizza_place = PizzaPlace.find(params[:pizza_place_id])
       @comment = Comment.find(params[:id])
       @comment.update(comment_params)
+      flash.notice = "Comment Updated!"
 
       redirect_to pizza_place_path(@pizza_place)
     end
@@ -42,6 +42,7 @@ class CommentsController < ApplicationController
       @pizza_place = PizzaPlace.find(params[:pizza_place_id])
       @comment = Comment.find(params[:id])
       @comment.destroy
+      flash.notice = "Comment Deleted!"
       redirect_to pizza_place_path(@pizza_place)
       # # @pizza_place = PizzaPlace.find(params[:id])
       # redirect_to pizza_place_path(@pizza_place.id)

@@ -1,9 +1,7 @@
 <div id="login-page">
 <%= form_for :session, url: login_path,  :html => {:class => "container"} do |f| %>
     <h1>Log In</h1>
-    <% flash.each do |message_type, message| %>
-      <div class="alert alert-<%= message_type %>"><h1><%= message %></h1></div>
-    <% end %>
+
     <div class="form">
     <%= f.label :username, "Username:"%>
     <%= f.text_field :username%> <br>

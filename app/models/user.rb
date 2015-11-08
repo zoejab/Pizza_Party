@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+
+  before_save {self.email = email.downcase}
+  
   has_and_belongs_to_many :pizza_places
   has_many :comments
   has_many :favorites

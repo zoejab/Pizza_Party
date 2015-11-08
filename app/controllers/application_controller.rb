@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   include SessionsHelper
 
+  # before_action :authenticate
+
   def authenticate
   unless logged_in?
     flash[:error] = "You must be logged in to access this section."

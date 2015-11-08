@@ -1,28 +1,60 @@
+<div id="pizza-show">
 
+<div id="back">
+  <%= link_to "<< Back to Pizza Places", pizza_places_path %>
+</div>
 
-<%= link_to "<< Back to Pizza Places", pizza_places_path %>
+  <h1><%= @pizza_place.name %></h1>
 
-<h1><%= @pizza_place.name %></h1>
+  <div id="list">
+    <% if logged_in? %>
 
-<ul class="information">
-  <li>Address: <%=@pizza_place.address %></li>
-  <li>Phone: <%= @pizza_place.phone %> </li>
+    <%- unless current_user.favorite_pizza_places.exists?(id: @pizza_place.id) -%>
+    <%= link_to "Eaten here? Add it to your profile!", favorite_pizza_places_path(pizza_place_id: @pizza_place), method: :post %>
+    <%- else -%>
+    <%= link_to "You've Eaten Here. Remove From Your Profile?", favorite_pizza_place_path(@pizza_place), method: :delete %>
+    <%- end -%>
+    <%- end -%>
+  </div>
 
-  <li><a href="http://<%= @pizza_place.website %>"> Website </a></li>
+  <ul class="information">
+    <li>Address:
+      <span>
+        <%=@pizza_place.address %>
+      </span>
+    </li>
+    <li>Neighborhood:
+      <span>
+        <%= @pizza_place.neighborhood %></span>
+    </li>
+    <li>Phone:
+      <span>
+        <%= @pizza_place.phone %></span>
+    </li>
+    <li>
+      <a href="http://<%= @pizza_place.website %>"><span>
+      Website</span>
+  </a>
+</li>
+
+<br>
+<li>What To Order:
+  <span>
+    <%= @pizza_place.item %>
+  </span>
+</li>
+<li>
+  <img alt="" src="<%= @pizza_place.image_url %>"/>
+</li>
+
 </ul>
 
-<% if logged_in? %>
+<hr>
 
-<%- unless current_user.favorite_pizza_places.exists?(id: @pizza_place.id) -%>
-
-<%= link_to "I've Been There!", favorite_pizza_places_path(pizza_place_id: @pizza_place), method: :post %>
-<%- else -%>
-<%= link_to 'Remove from favorites', favorite_pizza_place_path(@pizza_place), method: :delete %>
-<%- end -%>
-<%- end -%>
-
-
-<h3> Comments </h3>
+<div id="comments">
+<h3>
+Reviews
+</h3>
 
 <% if logged_in? %>
 <%= render partial: 'comments/form'%>
@@ -30,3 +62,5 @@
 <% end %>
 
 <%= render partial: 'comments/comment', collection: @pizza_place.comments %>
+</div>
+</div>

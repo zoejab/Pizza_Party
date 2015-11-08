@@ -1,16 +1,31 @@
 <div id="user-page">
 
-  <h1>Hi, <%= @user.username%>.</h1><br>
+  <h1>Hi,
+    <%= @user.username%>.</h1>
 
-<% @user.favorite_pizza_places.each do |pizza_place|%>
-    <div class="pizzaplace">
-    <%= link_to pizza_place.name, pizza_place_path(pizza_place.id) %>
+  <h3>
+    <u>Where You've Eaten</u>
+  </h3>
+
+<!-- for every pizza place show the image and information -->
+<% @user.favorite_pizza_places.each do |place|%>
+  <li>
+    <div class="pizza-places">
+
+      <img class="pizza-picture" src="<%=place.image_url%>"/>
+
+      <div class="pizza-place-name">
+        <h2>
+          <%= link_to place.name, pizza_place_path(place) %>
+        </h2>
+      </div>
     </div>
-
-
-    <% end %>
-
-<% if logged_in? && current_user %>
-  <%= button_to 'DELETE ACCOUNT', @user, :method => :delete, data: { confirm: "You sure?" } %>
+  </li>
 <% end %>
+
+<br>
+  <% if logged_in? %>
+  <%= button_to 'DELETE ACCOUNT', @user, :method => :delete, data: { confirm: "You sure?" } %>
+  <% end %>
+<br>
 </div>
