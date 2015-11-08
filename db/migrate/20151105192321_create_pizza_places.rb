@@ -9,6 +9,9 @@ class CreatePizzaPlaces < ActiveRecord::Migration
       t.string :phone
       t.integer :rating
       t.string :website
+      t.string  :neighborhood
+      t.string   :image_url
+      t.string  :item
 
       t.timestamps null: false
     end

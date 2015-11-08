@@ -10,19 +10,22 @@
       </ul>
     </div>
     <% end %>
-    <div class="form">
+    <div class="form-newuser">
     <%= f.label :username, "Username:"%>
     <%= f.text_field :username%>
+    <br>
 
     <%= f.label :email, "Email:"%>
     <%= f.text_field :email%>
+    <br>
 
     <%= f.label :password, "Password:"%>
     <%= f.password_field :password%>
+    <br>
 
     <%= f.label :password_confirmation, "Confirm Password:"%>
     <%= f.password_field :password_confirmation%>
-
+    <br>
 <div id="submit-button">
     <%= f.submit %>
   </div>

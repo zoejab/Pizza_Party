@@ -2,7 +2,8 @@
 <hr>
 
 <p class="username">
-    Review By <%= link_to User.find(comment.user_id).username, user_path(comment.user_id) %>
+    Review By <%= link_to user = User.find(comment.user_id).username, user_path(comment.user_id) %>
+
 </p>
 
   <p class="timestamp"> Posted <%= time_ago_in_words(comment.created_at) %>

@@ -3,11 +3,16 @@
   <h1>Hi,
     <%= @user.username%>.</h1>
 
+    <% if party_member? %>
+    <img id="partymember" src="http://i64.tinypic.com/avogoz.png" alt="" />
+
+    <% end %>
+
   <h3>
     <u>Where You've Eaten</u>
   </h3>
 
-<!-- for every pizza place show the image and information -->
+<!-- for every pizza place they've been to - show the image and information -->
 <% @user.favorite_pizza_places.each do |place|%>
   <li>
     <div class="pizza-places">

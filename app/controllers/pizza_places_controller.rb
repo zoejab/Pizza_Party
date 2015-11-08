@@ -9,7 +9,7 @@ class PizzaPlacesController < ApplicationController
     @pizza_place = PizzaPlace.find(params[:id])
     @comment = Comment.new
     # @comment.pizza_place_id = @pizza_place.id
-
+  
   end
 
 end

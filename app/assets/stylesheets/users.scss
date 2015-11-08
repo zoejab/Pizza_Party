@@ -27,7 +27,7 @@
   padding-bottom: 10px;
 }
 
-#user-page img {
+.pizza-picture {
   width: 200px;
   box-sizing: border-box;
   border: solid 3px black;
@@ -44,15 +44,42 @@
   text-decoration: none
 }
 
-
 .alert h1 {
   font-size: 14px;
   color: red;
 }
 
-.error_messages, .error_messages ul {
+.error_messages ul {
   font-size: 12px;
   color: red;
   text-align: left;
   list-style-type: circle;
+}
+
+#partymember {
+  width: 200px;
+  margin-left: 310px;
+  margin-top: -10px;
+  margin-bottom: -20px;
+}
+
+#signup {
+  margin-top: 180px;
+  background: white;
+  position: absolute;
+  width: 500px;
+  margin-left: 425px;
+  text-align: center;
+  box-sizing: border-box;
+  border: solid black 4px;
+  border-radius: 15px;
+  padding: 0px 100px 20px 100px;
+}
+
+#submit-button {
+  margin-right: 100px;
+}
+
+.form-newuser {
+  text-align: right;
 }
