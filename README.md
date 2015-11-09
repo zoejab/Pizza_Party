@@ -15,7 +15,10 @@ View the Website here: https://secret-everglades-7191.herokuapp.com/pizza_places
   - anyone - as long as you are logged in to any account - can delete an account
   - when you sign up and have an error message appear (as in you put in a nonqualifying password) the form to login has CSS Problems
 
-Wireframes located here:
+Wireframes located here: https://github.com/zoejab/Pizza_Party/tree/master/wireframes
+
+ERB Documents, Authorization Grid, Database Properties:
+https://github.com/zoejab/Pizza_Party/blob/master/USER%20GRID.xlsx
 
 - User Stories:
   - As a guest/member, I want to see the list of 10 Best Pizza Places in New York City so I can become aware of the main purpose of the site.
@@ -25,6 +28,3 @@ Wireframes located here:
   - As a guest/member, I also want to be able to see comments from members who have eaten pizza at that place.
   - As a member, I want to be able to be crowned a member of the "Pizza Party", an elite club of users who have eaten the best pizza NYC has to offer!
   - As a member of the Pizza Party, I want to have this elite status displayed on my profile.
-
-ERB Documents, Authorization Grid, Database Properties:
-https://github.com/zoejab/Pizza_Party/blob/master/USER%20GRID.xlsx
