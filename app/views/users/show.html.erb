@@ -29,7 +29,7 @@
 <% end %>
 
 <br>
-  <% if logged_in? %>
+  <% if logged_in? && current_user.id == @user.id %>
   <%= button_to 'DELETE ACCOUNT', @user, :method => :delete, data: { confirm: "You sure?" } %>
   <% end %>
 <br>

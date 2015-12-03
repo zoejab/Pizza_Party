@@ -71,7 +71,6 @@ header {
   padding-top: 20px;
 }
 
-
 h2 {
   margin-bottom: -20px;
 }
@@ -117,8 +116,6 @@ ul {
 }
 
 .pizza-place-name:hover { opacity: 1; }
-
-
 
 .form {
   width: 100%;
