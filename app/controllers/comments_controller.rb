@@ -1,5 +1,7 @@
 class CommentsController < ApplicationController
 
+  skip_before_action :authenticate, only: [:index, :show]
+
     def create
       @comment = Comment.new(comment_params)
       @comment.pizza_place_id = params[:pizza_place_id]
@@ -24,7 +26,14 @@ class CommentsController < ApplicationController
     end
 
     def edit
+      @pizza_place = PizzaPlace.find(params[:pizza_place_id])
       @comment = Comment.find(params[:id])
+      if current_user.id != @comment.user_id
+        redirect_to pizza_place_path(@pizza_place)
+      else
+          @comment = Comment.find(params[:id])
+      end
+
       # @pizza_place = PizzaPlace.find(params[:pizza_place_id])
       #
     end

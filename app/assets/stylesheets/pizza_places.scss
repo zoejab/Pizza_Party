@@ -6,7 +6,8 @@
 
 // PIZZA INDEX PAGE
 #pizza-index{
-  margin-top: 100px;
+  position: relative;
+  top: 100px;
   background: white;
   position: absolute;
 }
@@ -105,4 +106,9 @@ span {
   border-radius: 10px;
   font-size: 12px;
   font: Arial;
+}
+
+#post-review {
+  position: relative;
+  top: 0px;
 }
