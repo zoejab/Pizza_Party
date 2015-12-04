@@ -1,5 +1,7 @@
 class CommentsController < ApplicationController
 
+    skip_before_action :authenticate, only: [:index, :show]
+
     def create
       @comment = Comment.new(comment_params)
       @comment.pizza_place_id = params[:pizza_place_id]

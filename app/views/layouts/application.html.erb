@@ -11,37 +11,39 @@
 
 <body>
 
-  <header>
-    <a href="/pizza_places/">
-      <img class="logo" src="http://i65.tinypic.com/125tlqp.png" alt="" />
-    </a>
+<div class="container-fluid">
 
-    <!-- <h2 class="tagline"> Can you join <i>THE</i> Pizza Party? </h2> -->
+  <div class="row" id='header'>
+    <div class="col-md-8" id="logo">  <a href="/pizza_places/">
+        <img class="logo" src="http://i66.tinypic.com/288cidv.png" alt="" />
+      </a></div>
+    <div class="col-md-4">  <% if logged_in? %>
+        <div class="log-status col-md-2">
+          You are logged in as
+          <div id="username-header">
+          <%= link_to current_user.username, user_path(current_user.id)%>
+          </div>
+          <br>
 
-    <% if logged_in? %>
-      <div class="log-status">
-        You are logged in as
-        <div id="username-header">
-        <%= link_to current_user.username, user_path(current_user.id)%>
+          <div class="btn btn-default" id="logout-button">
+          <%= button_to 'Logout', logout_path, :method => :delete %>
         </div>
-        <br>
-
-        <div id="logout-button">
-        <%= button_to 'Logout', logout_path, :method => :delete %>
-      </div>
-      </div>
-
-      <% else %>
-        <div class="log-status" id="login-header">
-          <%= link_to 'Login', login_path %>
         </div>
-        <% end %>
 
-  </header>
+        <% else %>
+          <div  class="btn btn-default" id="login-header">
+            <%= link_to 'Login', login_path %>
+          </div>
+          <% end %></div>
+  </div>
 
+
+
+</div>
   <%= yield %>
 
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.js" charset="utf-8"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 </body>
 
 </html>

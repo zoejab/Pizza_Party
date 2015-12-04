@@ -1,12 +1,26 @@
-<div id="pizza-index">
+<div class="container">
+
 <ul>
 
   <h2> The Best Pizza Places in New York </h2>
   <h4> According to Time Out Magazine </h4>
-<% @pizza_places.each do |place| %>
 
-<li>
-<div class="pizza-places">
+  <div class="row" id="pizza-index-page">
+<% @pizza_places.each do |place| %>
+  <li>
+  <div class="col-md-3" id='picture'>
+    <span class="rollover" ></span>
+    <img class="pizza-picture" src="<%=place.image_url%>"/>
+
+      <h2 class="pizza-place-name"> <%= link_to place.name, pizza_place_path(place), class:"pizza-place", id: "pizza_place_#{place.id}" %>
+   </h2>
+
+  </div>
+</li>
+
+
+<!-- <li>
+<div class="pizza-places col-md-3">
 
    <img class="pizza-picture" src="<%=place.image_url%>"/>
 
@@ -16,9 +30,10 @@
   </div>
 
 </div>
-</li>
+</li> -->
 
 <% end %>
+</div>
 </ul>
 
 </div>

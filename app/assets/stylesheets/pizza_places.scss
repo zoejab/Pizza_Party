@@ -5,104 +5,108 @@
 // hover taken from: http://www.cssscript.com/demo/transparent-image-hover-overlay-with-pure-css-css3/
 
 // PIZZA INDEX PAGE
-#pizza-index{
-  margin-top: 100px;
-  background: white;
-  position: absolute;
-}
 
-#pizza-index li {
-  text-decoration: none;
-  list-style-type: none;
-  display: inline-block;
-  padding-bottom: 10px;
-}
 
-#pizza-index img {
-  width: 300px;
-  height: 200px;
-  box-sizing: border-box;
-  border: solid 4px black;
-  border-radius: 15px;
-}
 
-#pizza-index h2 {;
-  margin-top: 75px;
-}
 
-#pizza-index a {
-  color: white;
-}
-
-// PIZZA SHOW PAGE
-#pizza-show {
-  margin-top: 180px;
-  background: white;
-  position: absolute;
-  margin-left: 320px;
-  box-sizing: border-box;
-  border: solid black 4px;
-  border-radius: 15px;
-  padding: 0px 100px 20px 100px;
-  width: 50%;
-}
-
-#pizza-show img {
-  width: 300px;
-  box-sizing: border-box;
-  border-radius: 15px;
-}
-
-#pizza-show h3 {
-  margin-top: -2px;
-  font-size: 20px;
-}
-
-#pizza-show h4 {
-  margin-top: -5px;
-  font-size: 15px;
-}
-
-#list, #list a{
-  margin-top: -20px;
-  color: #e74c3c;
-}
-
-span {
-  color: #27ae60;
-}
-
-#back {
-  margin-left: -95px;
-}
-
-#back a:hover {
-  color: #27ae60;
-}
-
-#comment_body {
-  width: 100%;
-  height: 100px;
-  margin-top: -15px;
-  margin-bottom: -10px;
-}
-
-.comment-options {
-  font-size: 11px;
-}
-
-.timestamp {
-  font-size: 12px;
-  color:#7f8c8d;
-  margin-top: -12px;
-  margin-bottom: -5px;
-}
-
-.comment {
-  background: #ecf0f1;
-  width: 100%;
-  padding: 10px;
-  border-radius: 10px;
-  font-size: 12px;
-  font: Arial;
-}
+// #pizza-index{
+//   margin-top: 100px;
+//   background: white;
+//   position: absolute;
+// }
+//
+// #pizza-index li {
+//   text-decoration: none;
+//   list-style-type: none;
+//   display: inline-block;
+//   padding-bottom: 10px;
+// }
+//
+// #pizza-index img {
+//   width: 270px;
+//   height: 200px;
+//   box-sizing: border-box;
+//   border: solid 4px black;
+//   border-radius: 15px;
+// }
+//
+// #pizza-index h2 {;
+//   margin-top: 75px;
+// }
+//
+// #pizza-index a {
+//   color: white;
+// }
+//
+// // PIZZA SHOW PAGE
+// #pizza-show {
+//   margin-top: 180px;
+//   background: white;
+//   position: absolute;
+//   margin-left: 320px;
+//   box-sizing: border-box;
+//   border: solid black 4px;
+//   border-radius: 15px;
+//   padding: 0px 100px 20px 100px;
+//   width: 50%;
+// }
+//
+// #pizza-show img {
+//   width: 300px;
+//   box-sizing: border-box;
+//   border-radius: 15px;
+// }
+//
+// #pizza-show h3 {
+//   margin-top: -2px;
+//   font-size: 20px;
+// }
+//
+// #pizza-show h4 {
+//   margin-top: -5px;
+//   font-size: 15px;
+// }
+//
+// #list, #list a{
+//   margin-top: -20px;
+//   color: #e74c3c;
+// }
+//
+// span {
+//   color: #27ae60;
+// }
+//
+// #back {
+//   margin-left: -95px;
+// }
+//
+// #back a:hover {
+//   color: #27ae60;
+// }
+//
+// #comment_body {
+//   width: 100%;
+//   height: 100px;
+//   margin-top: -15px;
+//   margin-bottom: -10px;
+// }
+//
+// .comment-options {
+//   font-size: 11px;
+// }
+//
+// .timestamp {
+//   font-size: 12px;
+//   color:#7f8c8d;
+//   margin-top: -12px;
+//   margin-bottom: -5px;
+// }
+//
+// .comment {
+//   background: #ecf0f1;
+//   width: 100%;
+//   padding: 10px;
+//   border-radius: 10px;
+//   font-size: 12px;
+//   font: Arial;
+// }
