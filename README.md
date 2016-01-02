@@ -1,4 +1,4 @@
-# Pizza_Party
+# Pizza Party
 
 View the Website here: https://secret-everglades-7191.herokuapp.com/pizza_places
 
